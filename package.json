@@ -19,8 +19,11 @@
   },
   "homepage": "https://github.com/car-ffeine/react-without-cra#readme",
   "devDependencies": {
+    "@googlemaps/js-api-loader": "^1.16.2",
+    "@types/google.maps": "^3.53.4",
     "@types/react-dom": "^18.2.6",
     "css-loader": "^6.8.1",
+    "dotenv-webpack": "^8.0.1",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
     "ts-loader": "^9.4.4",
@@ -30,7 +33,6 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "@googlemaps/js-api-loader": "^1.16.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
