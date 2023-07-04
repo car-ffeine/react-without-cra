@@ -6,26 +6,42 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --port 3000 --open",
-    "build": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/car-ffeine/react-without-cra.git"
   },
-  "author": "feb-dain",
+  "author": {
+    "name": "feb-dain"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/car-ffeine/react-without-cra/issues"
   },
   "homepage": "https://github.com/car-ffeine/react-without-cra#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.22.6",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
     "@googlemaps/js-api-loader": "^1.16.2",
+    "@storybook/addon-essentials": "^7.0.25",
+    "@storybook/addon-interactions": "^7.0.25",
+    "@storybook/addon-links": "^7.0.25",
+    "@storybook/blocks": "^7.0.25",
+    "@storybook/react": "^7.0.25",
+    "@storybook/react-webpack5": "^7.0.25",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@types/google.maps": "^3.53.4",
     "@types/react-dom": "^18.2.6",
+    "chromatic": "^6.19.9",
     "css-loader": "^6.8.1",
     "dotenv-webpack": "^8.0.1",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
+    "storybook": "^7.0.25",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.5",
     "webpack": "^5.88.0",
@@ -35,5 +51,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "react-without-cra@1.0.0"
 }
