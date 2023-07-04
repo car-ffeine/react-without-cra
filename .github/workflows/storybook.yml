@@ -7,6 +7,8 @@ on:
 jobs:
   storybook:
     runs-on: ubuntu-20.04
+    permissions:
+      issues: write
     outputs:
       status: ${{ job.status }}
     steps:
