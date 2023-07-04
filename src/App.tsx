@@ -1,5 +1,4 @@
 import { Loader } from '@googlemaps/js-api-loader';
-import React from 'react';
 
 let map: google.maps.Map;
 
