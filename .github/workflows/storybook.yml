@@ -50,7 +50,7 @@ jobs:
       - name: Build Storybook
         run: |
           npm run build-storybook
-          mv ./storybook-static ./build/storybook
+          mv ./storybook-static ./dist/storybook
 
       - name: Deploy To 'gh-pages' Branch
         uses: peaceiris/actions-gh-pages@v3
