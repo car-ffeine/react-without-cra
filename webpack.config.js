@@ -34,7 +34,7 @@ module.exports = {
       template: 'index.html',
     }),
     new MiniCssExtractPlugin(),
-    new DotEnv(),
+    new DotEnv({ systemvars: true }),
     new CopyWebpackPlugin({
       patterns: [{ from: './storybook-static', to: './build/storybook' }],
     }),
