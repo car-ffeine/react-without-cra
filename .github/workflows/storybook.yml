@@ -1,42 +1,62 @@
 name: Storybook Deployment
 run-name: ${{ github.actor }}의 스토리북 배포
+
 on:
   pull_request:
     branches:
       - develop
-jobs:
-  storybook:
-    runs-on: ubuntu-20.04
-    permissions: write-all
-    outputs:
-      status: ${{ job.status }}
-    steps:
-      - name: checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - name: cache dependencies
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Use repository source
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache dependencies
         id: cache
         uses: actions/cache@v3
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-storybook
+          path: "**/node_modules"
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      - name: depedency install
+      - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      - name: publish to chromatic
-        id: chromatic
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build App
+        run: npm run build
 
+      - name: Build Storybook
+        run: |
+          npm run build-storybook
+          mv ./storybook-static ./build/storybook
+
+      - name: Deploy To 'gh-pages' Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+    
       - name: comment PR
         uses: thollander/actions-comment-pull-request@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          message: '🚀storybook: ${{ steps.chromatic.outputs.storybookUrl }}'
+          message: '🚀storybook: https://woowacourse-teams.io/2023-car-ffeine/storybook'
+  
