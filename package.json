@@ -37,6 +37,7 @@
     "@types/google.maps": "^3.53.4",
     "@types/react-dom": "^18.2.6",
     "chromatic": "^6.19.9",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "dotenv-webpack": "^8.0.1",
     "html-webpack-plugin": "^5.5.3",
