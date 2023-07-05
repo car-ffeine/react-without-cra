@@ -63,4 +63,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          message: '🚀storybook: https://woowacourse-teams.io/2023-car-ffeine/storybook'
+          message: '🚀storybook: https://car-ffeine.github.io/react-without-cra/storybook'

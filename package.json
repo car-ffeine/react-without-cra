@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/car-ffeine/react-without-cra/issues"
   },
-  "homepage": "https://github.com/car-ffeine/react-without-cra#readme",
+  "homepage": "https://car-ffeine.github.io/react-without-cra/",
   "devDependencies": {
     "@babel/preset-env": "^7.22.6",
     "@babel/preset-react": "^7.22.5",
