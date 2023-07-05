@@ -2,7 +2,7 @@ const prod = process.env.NODE_ENV === 'production';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const DotEnv = require('dotenv');
+const DotEnv = require('dotenv-webpack');
 
 module.exports = {
   mode: prod ? 'production' : 'development',
