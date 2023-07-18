@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --port 3000 --open",
+    "start": "webpack serve --open",
     "build": "NODE_ENV=production webpack",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -36,14 +37,18 @@
     "@storybook/testing-library": "^0.0.14-next.2",
     "@types/google.maps": "^3.53.4",
     "@types/react-dom": "^18.2.6",
+    "@types/styled-components": "^5.1.26",
     "chromatic": "^6.19.9",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "dotenv": "^16.3.1",
     "dotenv-webpack": "^8.0.1",
     "html-webpack-plugin": "^5.5.3",
+    "husky": "4",
     "mini-css-extract-plugin": "^2.7.6",
+    "msw": "^1.2.2",
     "storybook": "^7.0.25",
+    "styled-components": "^6.0.4",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.5",
     "webpack": "^5.88.0",
@@ -55,5 +60,10 @@
     "react-dom": "^18.2.0"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "react-without-cra@1.0.0"
+  "_id": "react-without-cra@1.0.0",
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,css,md}": [
+      "prettier --write"
+    ]
+  }
 }
