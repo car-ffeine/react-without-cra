@@ -38,11 +38,12 @@ jobs:
 
       - name: Update FE PR body
         run: |
-          if [ "${{ github.event.pull_request.labels }}" == *'FE'* ]; then
+          if [[ "${{ github.event.pull_request.labels }}" == *'FE'* ]]; then
             # If the 'FE' label is present on the PR, add the Storybook link to the PR body
             STORYBOOK_LINK="<br/><br /> 🚀 **[Storybook](https://storybook.carffe.in/)**"
             PR_BODY=$(jq -n --arg STORYBOOK_LINK "$STORYBOOK_LINK" '$STORYBOOK_LINK + "\n" + input')
             echo "::set-output name=PR_BODY::$PR_BODY"
           fi
+        shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
