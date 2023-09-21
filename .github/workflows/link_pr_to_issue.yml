@@ -22,37 +22,16 @@ jobs:
             });
             const body = pr.data.body;
             const issueNumber= pr.data.head.ref.split('/')[1];
-            const newBody = body + "\n\n" + "close #" + issueNumber;
+            const labels = pr.data.labels;
+
+            const isFeLabelPresent = labels.some(label => label.name === "FE");
+
+            const storybook_link = isFeLabelPresent ? "https://github.com/" : "";
+
+            const newBody = body + "\n\n" + "close #" + issueNumber + "\n\n" + "storybook" + storybook_link;
             await github.pulls.update({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   pull_number: context.issue.number,
                   body: newBody
-              });
-
-  append_storybook_link_to_fe_pr_body:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Update FE PR
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const pr = await github.pulls.get({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-            });
-            const body = pr.data.body;
-            const labels = pr.data.labels;
-
-            const isFeLabelPresent = labels.some(label => label.name === "FE");
-
-            if (isFeLabelPresent) {
-              const issueNumber = pr.data.head.ref.split('/')[1];
-              const newBody = body + "\n\n" + "storybook: (storybook link)" + issueNumber;
-              
-              await github.pulls.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: newBody
               });
