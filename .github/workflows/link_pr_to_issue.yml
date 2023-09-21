@@ -33,17 +33,26 @@ jobs:
   append_storybook_link_to_fe_pr_body:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Update FE PR
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = await github.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+            });
+            const body = pr.data.body;
+            const labels = pr.data.labels;
 
-      - name: Update FE PR body
-        run: |
-          if [[ "${{ github.event.pull_request.labels }}" == *'FE'* ]]; then
-            # If the 'FE' label is present on the PR, add the Storybook link to the PR body
-            STORYBOOK_LINK="<br/><br /> 🚀 **[Storybook](https://storybook.carffe.in/)**"
-            PR_BODY=$(jq -n --arg STORYBOOK_LINK "$STORYBOOK_LINK" '$STORYBOOK_LINK + "\n" + input')
-            echo "::set-output name=PR_BODY::$PR_BODY"
-          fi
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            const isFeLabelPresent = labels.some(label => label.name === "FE");
+
+            if (isFeLabelPresent) {
+              const issueNumber = pr.data.head.ref.split('/')[1];
+              const newBody = body + "\n\n" + "storybook: (storybook link)" + issueNumber;
+              
+              await github.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: newBody
+              });
