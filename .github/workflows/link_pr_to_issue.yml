@@ -26,9 +26,9 @@ jobs:
 
             const isFeLabelPresent = labels.some(label => label.name === "FE");
 
-            const storybook_link = isFeLabelPresent ? "https://github.com/" : "";
+            const storybook_link = isFeLabelPresent ? "🚀 **[Storybook](https://storybook.carffe.in/)**" : "";
 
-            const newBody = body + "\n\n" + "close #" + issueNumber + "\n\n" + "storybook" + storybook_link;
+            const newBody = body + "\n\n" + "close #" + issueNumber + "\n\n" + storybook_link;
             await github.pulls.update({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
